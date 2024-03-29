@@ -33,7 +33,21 @@ RUN apk -U add \
         uuid-dev \
         libgcrypt-dev \
         xxd \
+        dbus \
+        ffmpeg-dev \
+        libressl-dev \
+        libsndfile-dev \
+        mosquitto-dev \
+        popt-dev \
+        pulseaudio-dev \
         
+ && cd /root \
+ && git clone https://github.com/mikebrady/nqptp.git \
+ && cd nqptp \
+ && autoreconf -fi \
+ && ./configure --with-systemd-startup \
+ && make \
+ && make install \
  && cd /root \
  && git clone https://github.com/mikebrady/shairport-sync.git \
  && cd shairport-sync \
@@ -45,7 +59,7 @@ RUN apk -U add \
         --with-ssl=openssl \
         --with-soxr \
         --with-metadata \
-        -with-airplay-2 \
+        --with-airplay-2 \
  && make \
  && make install \
  && cd / \
